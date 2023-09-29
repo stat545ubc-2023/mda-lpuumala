@@ -2,7 +2,7 @@
 ## STAT 545A Mini Data Analysis Project
 Lauren Puumala
 
-This repository includes files for Lauren Puumala's mini data analysis project for STAT 545A. In particular, it includes files focused on exploratory data analysis of the vancouver_trees dataset (see [this link](https://opendata.vancouver.ca/explore/dataset/street-trees/information/?disjunctive.species_name&disjunctive.common_name&disjunctive.on_street&disjunctive.neighbourhood_name) for dataset details).
+This repository includes files for Lauren Puumala's mini data analysis project for STAT 545A. In particular, it includes files focused on exploratory data analysis of the vancouver_trees dataset using dplyr and ggplot packages. Please see [this link](https://opendata.vancouver.ca/explore/dataset/street-trees/information/?disjunctive.species_name&disjunctive.common_name&disjunctive.on_street&disjunctive.neighbourhood_name) for more dataset details.
 
 Project Milestones | Due date
 -------------------|----------
