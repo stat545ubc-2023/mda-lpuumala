@@ -1,6 +1,8 @@
 ---
 title: "Mini Data-Analysis Deliverable 1"
-output: html_document
+author: Lauren Puumala and Lucy Gao
+date: 2023-10-3
+output: github_document
 ---
 
 # Welcome to your (maybe) first-ever data analysis project!
@@ -16,7 +18,7 @@ And hopefully the first of many. Let's get started:
 
 2.  Load the packages below.
 
-```{r}
+```{r load_libraries}
 library(datateachr)
 library(tidyverse)
 ```
@@ -83,11 +85,11 @@ And that is exactly the first thing that you will do!
 **Note**: We encourage you to use the ones in the `datateachr` package, but if you have a dataset that you'd really like to use, you can include it here. But, please check with a member of the teaching team to see whether the dataset is of appropriate complexity. Also, include a **brief** description of the dataset here to help the teaching team understand your data.
 
 <!-------------------------- Start your work below ---------------------------->
-
-1: CHOICE_1\_HERE\
-2: CHOICE_2\_HERE\
-3: CHOICE_3\_HERE\
-4: CHOICE_4\_HERE
+**Datasets of interest**  
+1: cancer_sample  
+2: flow_sample  
+3: steam_games  
+4: vancouver_trees  
 
 <!----------------------------------------------------------------------------->
 
@@ -96,23 +98,62 @@ And that is exactly the first thing that you will do!
 *Hint:* This is one of those times when you should think about the cleanliness of your analysis. I added a single code chunk for you below, but do you want to use more than one? Would you like to write more comments outside of the code chunk?
 
 <!-------------------------- Start your work below ---------------------------->
+**Dataset exploration**
+I will use the dplyr glimpse() function to explore the datasets. I will first check the **class** of these datasets to make sure that I can treat them as tibbles.
 
-```{r}
+```{r check_dataset_classes}
 ### EXPLORE HERE ###
-steam_games
+class(cancer_sample)
+class(flow_sample)
+class(steam_games)
+class(vancouver_trees)
+
 ```
+  
+The output of the code above shows that these datasets are all tibbles. This means that I can use **glimpse()** from dplyr to learn more about each dataset.
+
+First, I'll look at *cancer_sample*:
+```{r glimpse_cancer_sample}
+glimpse(cancer_sample)
+```
+  
+From the above code chunk, I learned that *cancer_sample* has 569 rows, 32 columns, and I learned the names and types of each variable in the dataset. The dataset appears to contain IDs for each individual, their diagnosis, and quantitative features of their condition. The variable types include dbl and chr.   
+  
+Now, I'll look at *flow_sample*:
+````{r glimpse_flow_sample}
+glimpse(flow_sample)
+```
+  
+From this, I can see that *flow_sample* has 218 rows, 7 columns, and the variables are station_id, year, extreme_type, month, day, flow, and sym. The variable types include dbl and chr.  
+
+Next, I'll look at *steam_games*:
+````{r glimpse_steam_games}
+glimpse(steam_games)
+```
+  
+From this, I can see that *steam_games* has 40,833 rows, 7 columns, and the variables include features about different video games, such as their ID, name, reviews, game details, and so on. The variable types include dbl and chr.   
+
+Finally, I'll look at *vancouver_trees*:
+````{r glimpse_vancouver_trees}
+glimpse(vancouver_trees)
+```
+  
+This dataset has 146,611 rows and 20 columns. It tabulates information about trees, including their ID number, location, species, and physical characteristics. The variable types include dbl, chr, and date.
 
 <!----------------------------------------------------------------------------->
 
 1.3 **(1 point)** Now that you've explored the 4 datasets that you were initially most interested in, let's narrow it down to 1. What lead you to choose this one? Briefly explain your choice below.
 
 <!-------------------------- Start your work below ---------------------------->
+**Dataset choice**  
+I have decided to choose the *vancouver_trees* dataset. I chose this dataset because it contains an interesting combination of different variable types. I'm also interested to know more about the types of trees that I see around Vancouver!
 
 <!----------------------------------------------------------------------------->
 
 1.4 **(2 points)** Time for a  final decision! Going back to the beginning, it's important to have an *end goal* in mind. For example, if I had chosen the `titanic` dataset for my project, I might've wanted to explore the relationship between survival and other variables. Try to think of 1 research question that you would want to answer with your dataset. Note it down below.
 
 <!-------------------------- Start your work below ---------------------------->
+**Research question:** How do the density of trees (i.e. number of trees per unit area) and diversity of tree species vary spatially within the city of Vancouver?
 
 <!----------------------------------------------------------------------------->
 
@@ -139,10 +180,105 @@ Make sure that you're using dplyr and ggplot2 rather than base R for this task. 
 7.  Make a new tibble with a subset of your data, with variables and observations that you are interested in exploring.
 8.  Use a density plot to explore any of your variables (that are suitable for this type of plot).
 
-2.2 **(4 points)** For each of the 4 exercises that you complete, provide a *brief explanation* of why you chose that exercise in relation to your data (in other words, why does it make sense to do that?), and sufficient comments for a reader to understand your reasoning and code.
+2.2 **(4 points)** For each of the 4 exercises that you complete, provide a *brief explanation* of why you chose that exercise in relation to your data (in other words, why does it make sense to do that?), and sufficient comments for a reader to understand your reasoning and code.  
 
 <!-------------------------- Start your work below ---------------------------->
+## Introduction
+In this document, I will be exploring the *vancouver_trees* dataset using *tidyverse* packages in R. In particular, I will used *dplyr* to manipulate the data and *ggplot* to graph and otherwise visualize the data. This data exploration will include four exercises:  
+1. Plotting the distribution of a numeric variable  
+2. Exploring the relationship between two variables in a plot  
+3. Filtering observations  
+4. Preparing a density plot  
 
+## Exercise 1: plotting the distribution of a numeric variable  
+First, I want to know about how wide the trunks of trees are in the City of Vancouver. As such, I will start by plotting the distribution of the variable called **diameter**. According to documentation available for this dataset at [this website](https://opendata.vancouver.ca/explore/dataset/street-trees/information/?disjunctive.species_name&disjunctive.common_name&disjunctive.on_street&disjunctive.neighbourhood_name), this variable represents the tree diameter, measured in inches at breast height. I will plot the distribution of this variable as a histogram. This will help me to better understand the range of tree sizes as well as typical tree sizes in the city.  
+````{r exercise1_plot_distribution}
+#Use dplyr and ggplot to create a histogram of the diameter variable in the vancouver_trees dataset
+vancouver_trees %>% #specify dataset
+  ggplot(aes(diameter))+
+  geom_histogram(binwidth=5)+ #create histogram of diameter with bin width of 5
+  scale_x_continuous(n.breaks=10)+
+  xlab("Tree diameter at breast height (inches)")+
+  ylab("Number of trees")+
+  theme_minimal()
+```
+  
+From this plot, we can see that almost all trees have diameters less than 60 inches. Since the x axis goes all the way up to 450", there must be some trees with unusually large diameters that are difficult to see in this plot. Out of curiosity, I will check what the greatest tree diameter in this dataset is. I will also see how many trees there are with diameters greater than 60 inches.  
+
+````{r exercise1_explore_diams}
+vancouver_trees %>%
+  summarise(max_diam=max(diameter)) #max_diam is the greatest tree diameter in this dataset
+
+vancouver_trees %>%
+  filter(diameter>=60) %>%
+  summarise(diam_greater_than_60=n()) #diam_greater_than_60 is the number of trees with a diameter greater than 60"
+```
+  
+We can see that the greatest diameter in this dataset is 435 inches and there are 67 trees with diameters greater than 60 inches.  
+
+## Exercise 2: exploring the relationship between two variables in a plot  
+Next, I will investigate the relationship between two variables, specifically **diameter** and **height_range_id**. My hypothesis is that trees with larger diameters will also have greater heights; that is, I expect these variables to be positively correlated. The variable **height_range_id** represents the tree height and is specified by an integer from 0-10 for every 10 feet. That is, a value of 0 means the tree is between 0 and 10 feet tall, a value of 1 means it is between 10 and 20 feet tall, and so on. Since **height_range_id** is not a continuous variable given that the heights are binned into range categories, I will plot the relationship using a boxplot.
+
+````{r exercise2_plot_relationship}
+#Create a boxplot to illustrate the relationship between diameter and height_range_id.
+#height_range_id will be on the x axis and diameter will be on the y axis
+vancouver_trees %>% #specify dataset
+  ggplot(aes(x=factor(height_range_id),y=diameter))+
+  geom_boxplot(alpha=0.4,width=0.5)+
+  theme_minimal()+
+  xlab("Height Range ID")+
+  ylab("Tree diameter at breast height (inches)")
+```
+  
+From this plot, we can see that, on average, tree diameter generally increases with increasing height. Nevertheless, there are many outliers and the widest tree is only 20-30 feet tall!
+
+## Exercise 3: filter observations  
+I am interested in learning how the types of trees that have been planted vary over time. In particular, have different tree  species been preferred during different time periods? First, I'll check the earliest and most recent **date_planted** values in the dataset to check the range of time over which these data were collected. 
+
+````{r exercise3_check_dates}
+#Summarise the earliest (min_date) and latest (max_date) dates in the vancouver_trees dataset. 
+vancouver_trees %>%
+  summarise(min_date=min(date_planted,na.rm=TRUE),max_date=max(date_planted,na.rm=TRUE)) #exclude NA values from calculation
+```
+  
+Now I know that the date_planted values span over about 40 years from 1989-2019. I will filter the data to look at how the species of trees planted before and after January 1, 2000 vary. Since there are so many tree species in this dataset, I will then also filter the data to show only the tree species for which there were more than 1000 planted during the time period. 
+
+````{r exercise3_filter}
+#Tree species planted before January 1, 2000
+vancouver_trees %>% #specify dataset
+  filter(date_planted<'2000-01-01') %>% #select trees planted before January 1, 2000
+  group_by(species_name) %>% #group by species
+  filter(n()>1000)%>% #select the species for which >1000 were planted in this time period
+  summarise(num_planted_before_2000=n()) %>% #number of trees planted for the selected species during this time period
+  arrange(desc(num_planted_before_2000)) #arrange in descending order
+
+#Tree species planted after January 1, 2000
+vancouver_trees %>% #specify dataset
+  filter(date_planted>='2000-01-01') %>% #select trees planted on or after January 1, 2000
+  group_by(species_name) %>% #group by species
+  filter(n()>1000)%>% #select the species for which >1000 were planted in this time period
+  summarise(num_planted_after_2000=n()) %>% #number of trees planted for the selected species during this time period
+  arrange(desc(num_planted_after_2000)) #arrange in descending order
+```
+    
+From this, it is apparent that before January 1, 2000, the three tree species that were planted most were platanoides, freemanix, and betulus. After January 1, 2000, the tree species that were planted most were rubrum, platanoides, and cerasifera.
+
+## Exercise 4: density plot    
+Now, I want to know if the presence of a root barrier has an effect on tree size. My hypothesis is that root barriers may inhibit tree growth and lead to trees with smaller trunks. To investigate this, I will use a density plot to investigate the relationship between the presence of a root barrier (**root_barrier** variable) and tree diameter (**diameter** variable).  
+
+````{r exercise4_density_plot}
+vancouver_trees %>% #select dataset
+  filter(diameter!=0) %>% #remove trees with a diameter of 0
+  ggplot(aes(x=diameter))+ #select diameter as the continuous variable on the x-axis
+  geom_density(aes(fill=root_barrier),alpha=0.4)+ #colour according to the value of root_barrier (Y/N)
+  scale_x_log10()+
+  guides(fill=guide_legend(title="Root barrier"))+ #specify colour legend title
+  xlab("Tree diameter at breast height (inches)")+
+  ylab("Density")+
+  theme_minimal()
+```
+  
+From this plot, it looks like there are a greater proportion of large diameter trees that have no root barrier than those that do have a root barrier. This is consistent with my hypothesis, but some further investigation would be required to draw any concrete conclusions about causation here. 
 <!----------------------------------------------------------------------------->
 
 # Task 3: Choose research questions 
@@ -150,6 +286,11 @@ Make sure that you're using dplyr and ggplot2 rather than base R for this task. 
 **(4 points)** So far, you have chosen a dataset and gotten familiar with it through exploring the data. You have also brainstormed one research question that interested you (Task 1.4).  Now it's time to pick 4 research questions that you would like to explore in Milestone 2! Write the 4 questions and any additional comments below. 
 
 <!--- *****START HERE***** --->
+**Research questions about the *vancouver_trees* dataset to explore in Milestone 2:**  
+1. Is tree size (height and diameter) correlated with the location in which the tree is planted? - *For example, is tree size correlated with longitude and/or latitude and can this be decoupled from other factors that may affect tree size (e.g., species, date planted, presence of a root box, plant area, etc.)*  
+2. How have tree planting practices changed over time? - *For example, has the popularity of root boxes changed over time?*  
+3. How does diversity in tree species vary between neighborhoods and plant areas (e.g., along streets vs. in parks)?  
+4. How has the number of trees planted in different neighborhoods around Vancouver changed over time?  
 
 <!----------------------------->
 
