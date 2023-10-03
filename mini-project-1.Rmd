@@ -98,7 +98,7 @@ And that is exactly the first thing that you will do!
 *Hint:* This is one of those times when you should think about the cleanliness of your analysis. I added a single code chunk for you below, but do you want to use more than one? Would you like to write more comments outside of the code chunk?
 
 <!-------------------------- Start your work below ---------------------------->
-**Dataset exploration**
+**Dataset exploration**  
 I will use the dplyr glimpse() function to explore the datasets. I will first check the **class** of these datasets to make sure that I can treat them as tibbles.
 
 ```{r check_dataset_classes}
@@ -184,7 +184,7 @@ Make sure that you're using dplyr and ggplot2 rather than base R for this task. 
 
 <!-------------------------- Start your work below ---------------------------->
 ## Introduction
-In this document, I will be exploring the *vancouver_trees* dataset using *tidyverse* packages in R. In particular, I will used *dplyr* to manipulate the data and *ggplot* to graph and otherwise visualize the data. This data exploration will include four exercises:  
+In this document, I will be exploring the *vancouver_trees* dataset using *tidyverse* packages in R. In particular, I will used *dplyr* to manipulate the data and *ggplot2* to graph and otherwise visualize the data. This data exploration will include four exercises:  
 1. Plotting the distribution of a numeric variable  
 2. Exploring the relationship between two variables in a plot  
 3. Filtering observations  
@@ -203,7 +203,7 @@ vancouver_trees %>% #specify dataset
   theme_minimal()
 ```
   
-From this plot, we can see that almost all trees have diameters less than 60 inches. Since the x axis goes all the way up to 450", there must be some trees with unusually large diameters that are difficult to see in this plot. Out of curiosity, I will check what the greatest tree diameter in this dataset is. I will also see how many trees there are with diameters greater than 60 inches.  
+From this plot, we can see that almost all trees have diameters less than 60 inches. We can also see that there are a few trees with unusually large diameters that are much greater than 60 inches. Out of curiosity, I will check what the greatest tree diameter in this dataset is. I will also see how many trees there are with diameters greater than 60 inches.  
 
 ````{r exercise1_explore_diams}
 vancouver_trees %>%
@@ -287,7 +287,7 @@ From this plot, it looks like there are a greater proportion of large diameter t
 
 <!--- *****START HERE***** --->
 **Research questions about the *vancouver_trees* dataset to explore in Milestone 2:**  
-1. Is tree size (height and diameter) correlated with the location in which the tree is planted? - *For example, is tree size correlated with longitude and/or latitude and can this be decoupled from other factors that may affect tree size (e.g., species, date planted, presence of a root box, plant area, etc.)*  
+1. Is tree size (height and diameter) correlated with the location in which the tree is planted? - *For example, is tree size correlated with longitude and/or latitude and can this be decoupled from other factors that may affect tree size (e.g., species, date planted, presence of a root box, plant area, etc.)?*  
 2. How have tree planting practices changed over time? - *For example, has the popularity of root boxes changed over time?*  
 3. How does diversity in tree species vary between neighborhoods and plant areas (e.g., along streets vs. in parks)?  
 4. How has the number of trees planted in different neighborhoods around Vancouver changed over time?  

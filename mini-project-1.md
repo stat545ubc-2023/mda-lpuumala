@@ -168,9 +168,10 @@ comments outside of the code chunk?
 
 <!-------------------------- Start your work below ---------------------------->
 
-**Dataset exploration** I will use the dplyr glimpse() function to
-explore the datasets. I will first check the **class** of these datasets
-to make sure that I can treat them as tibbles.
+**Dataset exploration**  
+I will use the dplyr glimpse() function to explore the datasets. I will
+first check the **class** of these datasets to make sure that I can
+treat them as tibbles.
 
 ``` r
 ### EXPLORE HERE ###
@@ -435,7 +436,7 @@ sufficient comments for a reader to understand your reasoning and code.
 
 In this document, I will be exploring the *vancouver_trees* dataset
 using *tidyverse* packages in R. In particular, I will used *dplyr* to
-manipulate the data and *ggplot* to graph and otherwise visualize the
+manipulate the data and *ggplot2* to graph and otherwise visualize the
 data. This data exploration will include four exercises:  
 1. Plotting the distribution of a numeric variable  
 2. Exploring the relationship between two variables in a plot  
@@ -468,11 +469,11 @@ vancouver_trees %>% #specify dataset
 ![](mini-project-1_files/figure-gfm/exercise1_plot_distribution-1.png)<!-- -->
 
 From this plot, we can see that almost all trees have diameters less
-than 60 inches. Since the x axis goes all the way up to 450”, there must
-be some trees with unusually large diameters that are difficult to see
-in this plot. Out of curiosity, I will check what the greatest tree
-diameter in this dataset is. I will also see how many trees there are
-with diameters greater than 60 inches.
+than 60 inches. We can also see that there are a few trees with
+unusually large diameters that are much greater than 60 inches. Out of
+curiosity, I will check what the greatest tree diameter in this dataset
+is. I will also see how many trees there are with diameters greater than
+60 inches.
 
 ``` r
 vancouver_trees %>%
@@ -656,7 +657,7 @@ Milestone 2:**
 which the tree is planted? - *For example, is tree size correlated with
 longitude and/or latitude and can this be decoupled from other factors
 that may affect tree size (e.g., species, date planted, presence of a
-root box, plant area, etc.)*  
+root box, plant area, etc.)?*  
 2. How have tree planting practices changed over time? - *For example,
 has the popularity of root boxes changed over time?*  
 3. How does diversity in tree species vary between neighborhoods and
