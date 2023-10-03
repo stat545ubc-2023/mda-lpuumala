@@ -6,7 +6,7 @@ This repository includes files for Lauren Puumala's mini data analysis project f
 
 Project Milestones | Due date
 -------------------|----------
-Milestone 1 | 2023-10-03
+Milestone 1 | 2023-10-06
 Milestone 2 | 2023-10-25
 
 ### Files and folders in this repository
