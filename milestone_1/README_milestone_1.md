@@ -4,7 +4,7 @@ Lauren Puumala
 
 This folder contains the source for milestone 2 of this project.
 
-### Contents of this repository
+### Contents of this folder
 File/Folder Name | Description
 -----------------|-------------
 README_milestone_1.md | This README file, which explains the contents of this GitHub folder
